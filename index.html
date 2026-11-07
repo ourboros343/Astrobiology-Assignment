@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrobiology Research Project | Extremophile Survival on Mars & Europa</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        space: {
+                            900: '#070a13',
+                            800: '#0d1322',
+                            700: '#172036',
+                            600: '#23304d',
+                        },
+                        mars: {
+                            accent: '#e76f51',
+                            glow: '#f4a261'
+                        },
+                        europa: {
+                            accent: '#48cae4',
+                            glow: '#90e0ef'
+                        },
+                        bio: {
+                            green: '#2a9d8f',
+                            purple: '#a855f7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #070a13;
+            color: #e2e8f0;
+        }
+        .glow-mars {
+            box-shadow: 0 0 25px -5px rgba(231, 111, 81, 0.3);
+        }
+        .glow-europa {
+            box-shadow: 0 0 25px -5px rgba(72, 202, 228, 0.3);
+        }
+        .tab-active {
+            border-bottom: 3px solid #38bdf8;
+            color: #38bdf8;
+            background-color: rgba(56, 189, 248, 0.08);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0d1322;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #23304d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="custom-scrollbar min-h-screen flex flex-col selection:bg-cyan-500 selection:text-black">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-space-900/90 backdrop-blur-md border-b border-space-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-mars-accent to-europa-accent flex items-center justify-center font-bold text-space-900 text-xs">
+                    BIO
+                </div>
+                <div>
+                    <h1 class="text-base font-bold tracking-tight text-white">Astrobiology Research Lab</h1>
+                    <p class="text-xs text-slate-400">10th Grade Astrobiology Project: Extremophile Survival</p>
+                </div>
+            </div>
+            
+            <nav class="hidden md:flex space-x-1 text-sm font-medium">
+                <a href="#overview" class="px-3 py-2 rounded-md hover:text-cyan-400 hover:bg-space-800 transition">Overview</a>
+                <a href="#planetary-bodies" class="px-3 py-2 rounded-md hover:text-cyan-400 hover:bg-space-800 transition">Planetary Conditions</a>
+                <a href="#extremophiles" class="px-3 py-2 rounded-md hover:text-cyan-400 hover:bg-space-800 transition">Organisms</a>
+                <a href="#adaptations" class="px-3 py-2 rounded-md hover:text-cyan-400 hover:bg-space-800 transition">Survival Adaptations</a>
+                <a href="#rubric-matrix" class="px-3 py-2 rounded-md hover:text-cyan-400 hover:bg-space-800 transition">Summary Matrix</a>
+            </nav>
+
+            <button onclick="scrollToSection('adaptations')" class="text-xs font-semibold px-4 py-2 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/20 transition">
+                Explore Adaptations
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="overview" class="relative py-16 lg:py-24 overflow-hidden border-b border-space-700 bg-space-800/40">
+        <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#38bdf8_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-3xl">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-cyan-950 text-cyan-400 border border-cyan-800/50 mb-4">
+                    High School Astrobiology Project
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4 leading-tight">
+                    Surviving Beyond Earth: <br/>
+                    <span class="bg-clip-text text-transparent bg-gradient-to-r from-mars-accent via-purple-400 to-europa-accent">
+                        Extremophiles on Mars & Europa
+                    </span>
+                </h2>
+                <p class="text-base sm:text-lg text-slate-300 mb-8 leading-relaxed">
+                    Can Earth life survive the extreme cold, deadly radiation, and dry vacuums of other worlds? This project investigates how two real Earth organisms—the <strong class="text-white">Tardigrade (Water Bear)</strong> and <strong class="text-white">Deinococcus radiodurans</strong>—use special cellular adaptations to theoretically survive on <strong class="text-white">Mars</strong> and <strong class="text-white">Europa</strong>.
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-space-700">
+                    <div>
+                        <div class="text-xl font-bold text-mars-accent">Mars</div>
+                        <div class="text-xs text-slate-400">Cold, Dry & Radiated</div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold text-europa-accent">Europa</div>
+                        <div class="text-xs text-slate-400">Ice Shell & Deep Ocean</div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold text-purple-400">Glass Armor</div>
+                        <div class="text-xs text-slate-400">Tardigrade TDP Proteins</div>
+                    </div>
+                    <div>
+                        <div class="text-xl font-bold text-bio-green">DNA Repair</div>
+                        <div class="text-xs text-slate-400">Ringed Chromosomes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 1: PLANETARY BODIES (25 Points) -->
+    <section id="planetary-bodies" class="py-16 border-b border-space-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Requirement 1 (25 Points)</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Planetary Environmental Conditions</h2>
+                <p class="text-slate-400 text-sm mt-1">Detailed analysis of non-Earth environments in our solar system.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- MARS CARD -->
+                <div class="bg-space-800 rounded-2xl border border-mars-accent/30 overflow-hidden glow-mars flex flex-col">
+                    <div class="p-6 bg-gradient-to-r from-space-800 via-space-800 to-mars-accent/10 border-b border-space-700 flex justify-between items-center">
+                        <div>
+                            <span class="text-xs font-semibold text-mars-accent uppercase tracking-widest">Target Body 1</span>
+                            <h3 class="text-2xl font-bold text-white">Mars</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-mars-accent/20 border border-mars-accent/50 flex items-center justify-center text-mars-accent font-bold text-lg">
+                            ♂
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 space-y-6 flex-grow">
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Mars is a dusty, frozen desert planet. Because it lost its global magnetic field and most of its atmosphere billions of years ago, its surface is constantly exposed to deadly radiation and freezing temperatures.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Atmosphere & Pressure</span>
+                                <span class="font-mono font-semibold text-mars-glow text-sm">95% CO₂ (Thin)</span>
+                                <p class="text-[10px] text-slate-500 mt-1">Pressure is less than 1% of Earth's</p>
+                            </div>
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Temperature</span>
+                                <span class="font-mono font-semibold text-mars-glow text-sm">-80°F Average</span>
+                                <p class="text-[10px] text-slate-500 mt-1">Drops as low as -225°F at poles</p>
+                            </div>
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Radiation Level</span>
+                                <span class="font-mono font-semibold text-mars-glow text-sm">High UV & Cosmic Rays</span>
+                                <p class="text-[10px] text-slate-500 mt-1">No ozone layer or magnetic shield</p>
+                            </div>
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Liquid Water</span>
+                                <span class="font-mono font-semibold text-mars-glow text-sm">Extremely Scarce</span>
+                                <p class="text-[10px] text-slate-500 mt-1">Water freezes or evaporates quickly</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-mars-accent/5 rounded-xl border border-mars-accent/20">
+                            <h4 class="text-xs font-semibold text-mars-glow uppercase tracking-wider mb-2">Main Challenges for Life</h4>
+                            <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside">
+                                <li><strong>Severe Desiccation:</strong> Liquid water boils away or freezes immediately due to ultra-low air pressure.</li>
+                                <li><strong>Unfiltered UV Light:</strong> Direct UV rays break chemical bonds inside living cells.</li>
+                                <li><strong>Perchlorates in Soil:</strong> Toxic salts in Martian dust cause heavy chemical stress.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EUROPA CARD -->
+                <div class="bg-space-800 rounded-2xl border border-europa-accent/30 overflow-hidden glow-europa flex flex-col">
+                    <div class="p-6 bg-gradient-to-r from-space-800 via-space-800 to-europa-accent/10 border-b border-space-700 flex justify-between items-center">
+                        <div>
+                            <span class="text-xs font-semibold text-europa-accent uppercase tracking-widest">Target Body 2 (Jupiter's Moon)</span>
+                            <h3 class="text-2xl font-bold text-white">Europa</h3>
+                        </div>
+                        <div class="w-12 h-12 rounded-full bg-europa-accent/20 border border-europa-accent/50 flex items-center justify-center text-europa-accent font-bold text-lg">
+                            ♃
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 space-y-6 flex-grow">
+                        <p class="text-sm text-slate-300 leading-relaxed">
+                            Europa is an icy moon orbiting Jupiter. Underneath a 10 to 15-mile thick outer crust of solid ice lies a massive, warm liquid water ocean that covers the entire moon.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-3 text-xs">
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Ocean Location</span>
+                                <span class="font-mono font-semibold text-europa-glow text-sm">Subsurface Liquid Water</span>
+                                <p class="text-[10px] text-slate-500 mt-1">Protected under a thick shell of ice</p>
+                            </div>
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Surface Temp</span>
+                                <span class="font-mono font-semibold text-europa-glow text-sm">-260°F to -370°F</span>
+                                <p class="text-[10px] text-slate-500 mt-1">Sub-surface ocean stays liquid (~32°F)</p>
+                            </div>
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Pressure in Ocean</span>
+                                <span class="font-mono font-semibold text-europa-glow text-sm">High Water Pressure</span>
+                                <p class="text-[10px] text-slate-500 mt-1">Crushing hydrostatic pressure at depth</p>
+                            </div>
+                            <div class="p-3 bg-space-900/60 rounded-lg border border-space-700">
+                                <span class="text-slate-400 block mb-1">Jupiter Radiation</span>
+                                <span class="font-mono font-semibold text-europa-glow text-sm">Extreme on Surface</span>
+                                <p class="text-[10px] text-slate-500 mt-1">Ice shield protects ocean underneath</p>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-europa-accent/5 rounded-xl border border-europa-accent/20">
+                            <h4 class="text-xs font-semibold text-europa-glow uppercase tracking-wider mb-2">Main Challenges for Life</h4>
+                            <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside">
+                                <li><strong>Ice Crust Shielding:</strong> Top layer is blasted by Jupiter's magnetic radiation, but protects ocean below.</li>
+                                <li><strong>Total Darkness:</strong> No sunlight reaches the ocean, so organisms must rely on chemical heat vents.</li>
+                                <li><strong>Crushing Pressure:</strong> Subsurface water exerts immense pressure on deep-sea organisms.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: EXTREMOPHILE ORGANISMS (25 Points + 15 Points Visuals) -->
+    <section id="extremophiles" class="py-16 bg-space-800/30 border-b border-space-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-purple-400">Requirements 2 & 3 (25 Pts Organisms + 15 Pts Visuals)</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Selected Earth Extremophiles</h2>
+                <p class="text-slate-400 text-sm mt-1">Real Earth organisms capable of surviving extraterrestrial environments.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+                <!-- ORGANISM 1: TARDIGRADE -->
+                <div class="bg-space-800 rounded-2xl border border-space-700 overflow-hidden flex flex-col">
+                    <div class="p-6 border-b border-space-700 bg-space-900/50 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-purple-400 uppercase tracking-widest">Organism 1 (Micro-Animal)</span>
+                            <h3 class="text-2xl font-bold text-white">Tardigrade <span class="text-sm font-normal text-slate-400 italic">(Water Bear)</span></h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-purple-950 text-purple-300 border border-purple-800">Polyextremophile</span>
+                    </div>
+
+                    <div class="p-6 space-y-6 flex-grow">
+                        <!-- SVG ILLUSTRATION OF TARDIGRADE -->
+                        <div class="bg-space-900/90 rounded-xl p-4 border border-space-700 text-center">
+                            <svg class="w-full h-48 mx-auto" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                                    <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#172036" stroke-width="1"/>
+                                </pattern>
+                                <rect width="400" height="200" fill="url(#grid)" rx="8" />
+
+                                <!-- Tardigrade Active Form -->
+                                <g transform="translate(10, 0)">
+                                    <text x="100" y="25" fill="#a855f7" font-size="11" font-weight="bold" text-anchor="middle">ACTIVE STATE (Normal)</text>
+                                    <path d="M 40 100 C 40 60, 80 60, 100 60 C 130 60, 160 70, 170 100 C 160 130, 130 140, 100 140 C 80 140, 40 140, 40 100 Z" fill="#3b0764" stroke="#a855f7" stroke-width="2"/>
+                                    <path d="M 60 130 L 50 160 M 90 135 L 85 165 M 120 135 L 120 165 M 155 125 L 165 155" stroke="#c084fc" stroke-width="4" stroke-linecap="round"/>
+                                    <circle cx="50" cy="160" r="3" fill="#e9d5ff"/>
+                                    <circle cx="85" cy="165" r="3" fill="#e9d5ff"/>
+                                    <circle cx="120" cy="165" r="3" fill="#e9d5ff"/>
+                                    <circle cx="165" cy="155" r="3" fill="#e9d5ff"/>
+                                    <circle cx="55" cy="95" r="2" fill="#e9d5ff"/>
+                                    <path d="M 42 100 Q 35 100 38 105" stroke="#c084fc" stroke-width="2"/>
+                                    <circle cx="100" cy="100" r="15" fill="#a855f7" fill-opacity="0.3" stroke="#c084fc" stroke-dasharray="2 2"/>
+                                    <text x="100" y="103" fill="#ffffff" font-size="8" text-anchor="middle">Normal Cells</text>
+                                </g>
+
+                                <!-- Arrow -->
+                                <path d="M 195 100 L 225 100" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 2"/>
+                                <polygon points="225,96 233,100 225,104" fill="#38bdf8"/>
+                                <text x="210" y="90" fill="#38bdf8" font-size="9" text-anchor="middle">Loses Water</text>
+
+                                <!-- Tardigrade TUN State -->
+                                <g transform="translate(140, 0)">
+                                    <text x="200" y="25" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">"TUN" STATE (Protective Glass)</text>
+                                    <ellipse cx="200" cy="100" rx="35" ry="25" fill="#0c4a6e" stroke="#38bdf8" stroke-width="2.5"/>
+                                    <path d="M 175 115 Q 185 110 190 120 M 210 120 Q 215 110 225 115" stroke="#7dd3fc" stroke-width="3" stroke-linecap="round"/>
+                                    <path d="M 175 95 Q 200 85 225 95 M 170 105 Q 200 115 230 105" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="2 2"/>
+                                    <text x="200" y="102" fill="#e0f2fe" font-size="8" font-weight="bold" text-anchor="middle">Glassy Protein Matrix</text>
+                                </g>
+                            </svg>
+                            <p class="text-[11px] text-slate-400 mt-2">Figure 1.1: Water bears curl into a dried-out "Tun" state, using special glass proteins to protect their internal organs.</p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <h4 class="text-sm font-semibold text-white">Organism Profile</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Tardigrades are microscopic 8-legged animals about 0.5 mm long. When faced with freezing temperatures, high radiation, or zero water, they dry themselves out and enter a state called <strong>anhydrobiosis</strong>. In this mode, their metabolism stops until conditions improve.
+                            </p>
+                        </div>
+
+                        <div class="border-t border-space-700 pt-4">
+                            <h4 class="text-xs font-semibold text-purple-400 uppercase tracking-wider mb-2">Extreme Conditions Tested</h4>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">Temperature:</span> <span class="text-white font-mono">-328°F to +300°F</span>
+                                </div>
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">Space Vacuum:</span> <span class="text-white font-mono">10 days in open space</span>
+                                </div>
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">Radiation:</span> <span class="text-white font-mono">1,000x human lethal dose</span>
+                                </div>
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">Pressure:</span> <span class="text-white font-mono">6x deeper than ocean trench</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-purple-950/30 border border-purple-800/40 rounded-xl text-xs text-purple-200">
+                            <strong>Planetary Match:</strong> Can survive dormant on the surface of <strong>Mars</strong> and active in the deep liquid ocean of <strong>Europa</strong>.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ORGANISM 2: DEINOCOCCUS RADIODURANS -->
+                <div class="bg-space-800 rounded-2xl border border-space-700 overflow-hidden flex flex-col">
+                    <div class="p-6 border-b border-space-700 bg-space-900/50 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-semibold text-bio-green uppercase tracking-widest">Organism 2 (Bacterium)</span>
+                            <h3 class="text-2xl font-bold text-white">Deinococcus radiodurans</h3>
+                        </div>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-950 text-emerald-300 border border-emerald-800">Radiation-Resistant Microbe</span>
+                    </div>
+
+                    <div class="p-6 space-y-6 flex-grow">
+                        <!-- SVG ILLUSTRATION OF DEINOCOCCUS RADIODURANS -->
+                        <div class="bg-space-900/90 rounded-xl p-4 border border-space-700 text-center">
+                            <svg class="w-full h-48 mx-auto" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="400" height="200" fill="url(#grid)" rx="8" />
+
+                                <g transform="translate(100, 20)">
+                                    <circle cx="65" cy="55" r="42" fill="#064e3b" stroke="#10b981" stroke-width="2.5"/>
+                                    <circle cx="135" cy="55" r="42" fill="#064e3b" stroke="#10b981" stroke-width="2.5"/>
+                                    <circle cx="65" cy="125" r="42" fill="#064e3b" stroke="#10b981" stroke-width="2.5"/>
+                                    <circle cx="135" cy="125" r="42" fill="#064e3b" stroke="#10b981" stroke-width="2.5"/>
+
+                                    <circle cx="65" cy="55" r="24" fill="none" stroke="#34d399" stroke-width="6" stroke-dasharray="4 2"/>
+                                    <text x="65" y="58" fill="#ffffff" font-size="8" font-weight="bold" text-anchor="middle">Ring-Shaped DNA</text>
+
+                                    <circle cx="125" cy="45" r="4" fill="#facc15"/>
+                                    <circle cx="145" cy="65" r="4" fill="#facc15"/>
+                                    <circle cx="130" cy="70" r="4" fill="#facc15"/>
+                                    <text x="135" y="90" fill="#facc15" font-size="8" text-anchor="middle">Manganese Shield</text>
+
+                                    <path d="M 23 125 A 42 42 0 0 0 65 167" stroke="#6ee7b7" stroke-width="4"/>
+                                    <text x="20" y="175" fill="#6ee7b7" font-size="8">Tough Cell Wall</text>
+                                </g>
+
+                                <text x="200" y="190" fill="#10b981" font-size="10" font-weight="bold" text-anchor="middle">Tetrad (4-Cell Group) with Ring DNA & Manganese Shields</text>
+                            </svg>
+                            <p class="text-[11px] text-slate-400 mt-2">Figure 1.2: *D. radiodurans* lives in groups of 4 cells, packing its DNA in tight rings to easily fix radiation damage.</p>
+                        </div>
+
+                        <div class="space-y-3">
+                            <h4 class="text-sm font-semibold text-white">Organism Profile</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Known as <em>"Conan the Bacterium"</em>, this single-celled microbe holds world records for radiation survival. While radiation shatters normal DNA into useless pieces, this bacterium can put its entire genome back together perfectly in just a few hours.
+                            </p>
+                        </div>
+
+                        <div class="border-t border-space-700 pt-4">
+                            <h4 class="text-xs font-semibold text-bio-green uppercase tracking-wider mb-2">Extreme Conditions Tested</h4>
+                            <div class="grid grid-cols-2 gap-2 text-xs">
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">Gamma Radiation:</span> <span class="text-white font-mono">15,000 Gray (100% survival)</span>
+                                </div>
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">UV-C Rays:</span> <span class="text-white font-mono">Survives high UV doses</span>
+                                </div>
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">Drying:</span> <span class="text-white font-mono">Survives total dehydration</span>
+                                </div>
+                                <div class="bg-space-900/40 p-2 rounded border border-space-700">
+                                    <span class="text-slate-400">Chemical Stress:</span> <span class="text-white font-mono">Resists acid and peroxide</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-emerald-950/30 border border-emerald-800/40 rounded-xl text-xs text-emerald-200">
+                            <strong>Planetary Match:</strong> Can survive high surface radiation on <strong>Mars</strong> and extreme cold underneath the icy crust of <strong>Europa</strong>.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: ADAPTATION MECHANISMS (35 Points) -->
+    <section id="adaptations" class="py-16 border-b border-space-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <span class="text-xs font-bold uppercase tracking-wider text-cyan-400">Requirement 3 (35 Points)</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Specific Cellular Adaptations (How & Why They Work)</h2>
+                <p class="text-slate-400 text-sm mt-1">Explaining the exact biological mechanisms that allow these organisms to survive.</p>
+            </div>
+
+            <!-- Tab Buttons for Organism Mechanisms -->
+            <div class="flex border-b border-space-700 mb-8 overflow-x-auto custom-scrollbar">
+                <button id="tab-tardigrade-btn" onclick="switchTab('tardigrade')" class="tab-active px-6 py-3 font-semibold text-sm transition flex items-center space-x-2 whitespace-nowrap">
+                    <span>Tardigrade Mechanisms (Water Bear)</span>
+                </button>
+                <button id="tab-deinococcus-btn" onclick="switchTab('deinococcus')" class="px-6 py-3 font-semibold text-sm text-slate-400 hover:text-white transition flex items-center space-x-2 whitespace-nowrap">
+                    <span>Deinococcus Mechanisms (Radiation Bacterium)</span>
+                </button>
+            </div>
+
+            <!-- TAB 1 CONTENT: TARDIGRADES -->
+            <div id="tab-tardigrade" class="space-y-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Mechanism 1.1 -->
+                    <div class="bg-space-800 p-6 rounded-2xl border border-space-700 hover:border-purple-500/50 transition">
+                        <div class="w-10 h-10 rounded-lg bg-purple-950 border border-purple-700 text-purple-400 font-bold flex items-center justify-center mb-4 text-sm">
+                            01
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">TDP "Glass Shield" Proteins</h3>
+                        <p class="text-xs font-semibold text-purple-400 mb-3">Protects Against: Drying out on Mars</p>
+                        
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <p><strong>How & Why it works:</strong> When a tardigrade loses water, it produces special proteins called <em>Tardigrade-Disordered Proteins (TDPs)</em>.</p>
+                            <p>Instead of turning into sharp ice crystals that slice open cells, these proteins turn liquid cytoplasm into a solid, clear <strong>glass-like shield</strong> inside the cell.</p>
+                            <p>This glass grid holds all internal structures rigidly in place so cell walls do not collapse or pop while dried out.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mechanism 1.2 -->
+                    <div class="bg-space-800 p-6 rounded-2xl border border-space-700 hover:border-purple-500/50 transition">
+                        <div class="w-10 h-10 rounded-lg bg-purple-950 border border-purple-700 text-purple-400 font-bold flex items-center justify-center mb-4 text-sm">
+                            02
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Dsup "DNA Armor Sleeve"</h3>
+                        <p class="text-xs font-semibold text-purple-400 mb-3">Protects Against: Solar Radiation & UV Rays</p>
+                        
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <p><strong>How & Why it works:</strong> Tardigrades have a unique protective protein named <strong>Dsup</strong> (Damage Suppressor).</p>
+                            <p>Dsup acts like a flexible piece of physical body armor that wraps directly around the DNA strand inside the nucleus.</p>
+                            <p>When high-energy UV or cosmic rays hit the cell, Dsup absorbs the energy and blocks harmful chemical radicals from tearing the DNA backbone apart.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mechanism 1.3 -->
+                    <div class="bg-space-800 p-6 rounded-2xl border border-space-700 hover:border-purple-500/50 transition">
+                        <div class="w-10 h-10 rounded-lg bg-purple-950 border border-purple-700 text-purple-400 font-bold flex items-center justify-center mb-4 text-sm">
+                            03
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Trehalose Anti-Freeze Sugar</h3>
+                        <p class="text-xs font-semibold text-purple-400 mb-3">Protects Against: Deep Freezing on Europa</p>
+                        
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <p><strong>How & Why it works:</strong> Tardigrades accumulate high amounts of a protective biological sugar called <em>trehalose</em>.</p>
+                            <p>Trehalose replaces missing water molecules by binding directly to cell membranes, acting as a natural anti-freeze agent.</p>
+                            <p>This stops cell membranes from turning brittle and cracking open when temperatures drop below freezing (-300°F).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Molecular Diagram for Tardigrades -->
+                <div class="bg-space-800 p-6 rounded-2xl border border-space-700">
+                    <h4 class="text-sm font-bold text-white mb-4 flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+                        <span>Diagram: Dsup Armor Sleeve & TDP Glass Protection</span>
+                    </h4>
+
+                    <div class="bg-space-900 rounded-xl p-4 overflow-x-auto">
+                        <svg class="w-full min-w-[600px] h-64" viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- DNA Helix -->
+                            <path d="M 50 120 Q 100 40 150 120 T 250 120 T 350 120 T 450 120 T 550 120 T 650 120 T 750 120" stroke="#a855f7" stroke-width="4" fill="none"/>
+                            <path d="M 50 120 Q 100 200 150 120 T 250 120 T 350 120 T 450 120 T 550 120 T 650 120 T 750 120" stroke="#c084fc" stroke-width="4" fill="none"/>
+                            
+                            <!-- DNA Rungs -->
+                            <line x1="100" y1="80" x2="100" y2="160" stroke="#e9d5ff" stroke-width="2" stroke-dasharray="2 2"/>
+                            <line x1="200" y1="80" x2="200" y2="160" stroke="#e9d5ff" stroke-width="2" stroke-dasharray="2 2"/>
+                            <line x1="300" y1="80" x2="300" y2="160" stroke="#e9d5ff" stroke-width="2" stroke-dasharray="2 2"/>
+                            <line x1="400" y1="80" x2="400" y2="160" stroke="#e9d5ff" stroke-width="2" stroke-dasharray="2 2"/>
+                            <line x1="500" y1="80" x2="500" y2="160" stroke="#e9d5ff" stroke-width="2" stroke-dasharray="2 2"/>
+
+                            <!-- Dsup Armor Block -->
+                            <rect x="180" y="60" width="140" height="120" rx="12" fill="#38bdf8" fill-opacity="0.25" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 2"/>
+                            <text x="250" y="50" fill="#38bdf8" font-size="11" font-weight="bold" text-anchor="middle">Dsup Protective Armor Sleeve</text>
+
+                            <!-- Incoming Radiation (Blocked) -->
+                            <line x1="220" y1="10" x2="230" y2="55" stroke="#ef4444" stroke-width="2.5"/>
+                            <line x1="280" y1="10" x2="270" y2="55" stroke="#ef4444" stroke-width="2.5"/>
+                            <text x="250" y="20" fill="#ef4444" font-size="9" font-weight="bold" text-anchor="middle">Incoming UV / Cosmic Radiation</text>
+                            <path d="M 225 55 L 210 45 M 235 55 L 245 45" stroke="#f87171" stroke-width="2"/>
+
+                            <!-- Glass Matrix Zone -->
+                            <rect x="520" y="40" width="220" height="160" rx="12" fill="#1e1b4b" fill-opacity="0.7" stroke="#818cf8" stroke-width="2"/>
+                            <circle cx="560" cy="80" r="8" fill="#a855f7"/>
+                            <circle cx="640" cy="150" r="12" fill="#a855f7"/>
+                            <circle cx="700" cy="90" r="6" fill="#a855f7"/>
+                            <text x="630" y="115" fill="#c7d2fe" font-size="11" font-weight="bold" text-anchor="middle">TDP Glass Protein Grid</text>
+                            <text x="630" y="132" fill="#94a3b8" font-size="9" text-anchor="middle">(Stops Cell Collapse When Dry)</text>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2 CONTENT: DEINOCOCCUS RADIODURANS -->
+            <div id="tab-deinococcus" class="hidden space-y-8">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Mechanism 2.1 -->
+                    <div class="bg-space-800 p-6 rounded-2xl border border-space-700 hover:border-emerald-500/50 transition">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-700 text-emerald-400 font-bold flex items-center justify-center mb-4 text-sm">
+                            01
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Ring-Shaped Chromosomes</h3>
+                        <p class="text-xs font-semibold text-emerald-400 mb-3">Protects Against: Shattered DNA from Radiation</p>
+                        
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <p><strong>How & Why it works:</strong> In most cells, heavy radiation breaks DNA into floating pieces that drift away and get lost.</p>
+                            <p>*Deinococcus* packs its DNA into tightly wound <strong>doughnut-like rings (toroids)</strong>.</p>
+                            <p>Because the broken DNA pieces are squeezed closely together inside this ring, the cell's repair enzymes can instantly line them up and stitch them back together with 0% error.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mechanism 2.2 -->
+                    <div class="bg-space-800 p-6 rounded-2xl border border-space-700 hover:border-emerald-500/50 transition">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-700 text-emerald-400 font-bold flex items-center justify-center mb-4 text-sm">
+                            02
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Manganese Antioxidant Sponge</h3>
+                        <p class="text-xs font-semibold text-emerald-400 mb-3">Protects Against: Toxic Chemical Free Radicals</p>
+                        
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <p><strong>How & Why it works:</strong> Radiation creates toxic chemical fragments called <em>free radicals</em> that destroy cell machinery.</p>
+                            <p>This bacterium fills its cytoplasm with high amounts of <strong>Manganese ions</strong> combined with peptides.</p>
+                            <p>These manganese complexes act like chemical sponges, soaking up free radicals before they can destroy the DNA repair enzymes. This ensures the repair tools stay intact to fix the cell.</p>
+                        </div>
+                    </div>
+
+                    <!-- Mechanism 2.3 -->
+                    <div class="bg-space-800 p-6 rounded-2xl border border-space-700 hover:border-emerald-500/50 transition">
+                        <div class="w-10 h-10 rounded-lg bg-emerald-950 border border-emerald-700 text-emerald-400 font-bold flex items-center justify-center mb-4 text-sm">
+                            03
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Multi-Copy Genome (Polyploidy)</h3>
+                        <p class="text-xs font-semibold text-emerald-400 mb-3">Protects Against: Permanent Genetic Loss</p>
+                        
+                        <div class="space-y-3 text-xs text-slate-300">
+                            <p><strong>How & Why it works:</strong> Humans only have 2 copies of our genetic code in cells, but *Deinococcus* keeps 4 to 10 identical backup copies of its entire genome at all times.</p>
+                            <p>If radiation destroys one section of DNA, the cell simply reads one of its clean backup copies to rebuild the missing genetic sequence flawlessly.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Molecular Diagram for Deinococcus -->
+                <div class="bg-space-800 p-6 rounded-2xl border border-space-700">
+                    <h4 class="text-sm font-bold text-white mb-4 flex items-center space-x-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                        <span>Diagram: 3-Step DNA Repair & Manganese Protection Pathway</span>
+                    </h4>
+
+                    <div class="bg-space-900 rounded-xl p-4 overflow-x-auto">
+                        <svg class="w-full min-w-[600px] h-64" viewBox="0 0 800 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Step 1: Broken DNA -->
+                            <g transform="translate(30, 40)">
+                                <text x="90" y="20" fill="#ef4444" font-size="11" font-weight="bold" text-anchor="middle">1. DNA Shattered by Radiation</text>
+                                <line x1="20" y1="50" x2="70" y2="50" stroke="#f87171" stroke-width="3"/>
+                                <line x1="85" y1="50" x2="120" y2="50" stroke="#f87171" stroke-width="3"/>
+                                <line x1="135" y1="50" x2="170" y2="50" stroke="#f87171" stroke-width="3"/>
+                                
+                                <line x1="20" y1="80" x2="60" y2="80" stroke="#f87171" stroke-width="3"/>
+                                <line x1="75" y1="80" x2="115" y2="80" stroke="#f87171" stroke-width="3"/>
+                                <line x1="130" y1="80" x2="170" y2="80" stroke="#f87171" stroke-width="3"/>
+                                <text x="95" y="115" fill="#94a3b8" font-size="9" text-anchor="middle">Broken fragments held in tight ring</text>
+                            </g>
+
+                            <!-- Arrow -->
+                            <path d="M 230 100 L 270 100" stroke="#34d399" stroke-width="2" stroke-dasharray="2 2"/>
+                            <polygon points="270,96 278,100 270,104" fill="#34d399"/>
+
+                            <!-- Step 2: Manganese Shield -->
+                            <g transform="translate(290, 40)">
+                                <text x="100" y="20" fill="#facc15" font-size="11" font-weight="bold" text-anchor="middle">2. Manganese Shields Repair Tools</text>
+                                <circle cx="100" cy="65" r="30" fill="#854d0e" fill-opacity="0.4" stroke="#facc15" stroke-width="2"/>
+                                <text x="100" y="62" fill="#fef08a" font-size="10" font-weight="bold" text-anchor="middle">Repair Enzymes</text>
+                                <text x="100" y="74" fill="#fef08a" font-size="8" text-anchor="middle">(Protected from free radicals)</text>
+                                <circle cx="60" cy="50" r="6" fill="#facc15"/>
+                                <text x="60" y="53" fill="#000" font-size="7" font-weight="bold" text-anchor="middle">Mn²⁺</text>
+                                <circle cx="140" cy="80" r="6" fill="#facc15"/>
+                                <text x="140" y="83" fill="#000" font-size="7" font-weight="bold" text-anchor="middle">Mn²⁺</text>
+                            </g>
+
+                            <!-- Arrow -->
+                            <path d="M 500 100 L 540 100" stroke="#34d399" stroke-width="2" stroke-dasharray="2 2"/>
+                            <polygon points="540,96 548,100 540,104" fill="#34d399"/>
+
+                            <!-- Step 3: Fixed Genome -->
+                            <g transform="translate(560, 40)">
+                                <text x="90" y="20" fill="#34d399" font-size="11" font-weight="bold" text-anchor="middle">3. Genome Completely Rebuilt</text>
+                                <circle cx="90" cy="70" r="35" fill="none" stroke="#34d399" stroke-width="4"/>
+                                <circle cx="90" cy="70" r="28" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-dasharray="4 2"/>
+                                <text x="90" y="125" fill="#34d399" font-size="9" font-weight="bold" text-anchor="middle">Stitched together in 12-24 hours</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- SECTION 4: COMPARATIVE MATRIX -->
+    <section id="rubric-matrix" class="py-16 bg-space-800/20 border-b border-space-700">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Project Overview</span>
+                <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Planetary Habitability Matrix</h2>
+                <p class="text-slate-400 text-sm mt-1">Summary matching environmental hazards to organism adaptations.</p>
+            </div>
+
+            <div class="overflow-x-auto rounded-xl border border-space-700 bg-space-800">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-space-900 text-slate-300 font-semibold border-b border-space-700">
+                        <tr>
+                            <th class="p-4">Target World</th>
+                            <th class="p-4">Primary Environmental Hazard</th>
+                            <th class="p-4">Organism Candidate</th>
+                            <th class="p-4">Key Adaptation Mechanism</th>
+                            <th class="p-4">Survival Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-space-700 text-slate-300">
+                        <!-- Row 1 -->
+                        <tr class="hover:bg-space-900/40">
+                            <td class="p-4 font-bold text-mars-accent">Mars Surface</td>
+                            <td class="p-4">Solar UV Light & Cosmic Rays</td>
+                            <td class="p-4 font-medium text-white">Tardigrade & *D. radiodurans*</td>
+                            <td class="p-4">Dsup armor sleeve shielding DNA & Manganese antioxidants protecting repair tools.</td>
+                            <td class="p-4"><span class="px-2 py-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-semibold">High (Dormant/Active)</span></td>
+                        </tr>
+                        <!-- Row 2 -->
+                        <tr class="hover:bg-space-900/40">
+                            <td class="p-4 font-bold text-mars-accent">Mars Soil / Vacuum</td>
+                            <td class="p-4">Total Desiccation & Ultra-low Pressure</td>
+                            <td class="p-4 font-medium text-white">Tardigrade (*Water Bear*)</td>
+                            <td class="p-4">Anhydrobiosis: Turns internal liquid into a TDP glass protective matrix.</td>
+                            <td class="p-4"><span class="px-2 py-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-semibold">High (Dormant Tun)</span></td>
+                        </tr>
+                        <!-- Row 3 -->
+                        <tr class="hover:bg-space-900/40">
+                            <td class="p-4 font-bold text-europa-accent">Europa Sub-Surface Ocean</td>
+                            <td class="p-4">Crushing Ocean Water Pressure</td>
+                            <td class="p-4 font-medium text-white">Tardigrade (*Water Bear*)</td>
+                            <td class="p-4">Flexible cell membranes and pressure-stable enzymes withstand deep hydrostatic pressure.</td>
+                            <td class="p-4"><span class="px-2 py-1 rounded bg-cyan-950 text-cyan-400 border border-cyan-800 font-semibold">Moderate-High (Active)</span></td>
+                        </tr>
+                        <!-- Row 4 -->
+                        <tr class="hover:bg-space-900/40">
+                            <td class="p-4 font-bold text-europa-accent">Europa Outer Ice Shell</td>
+                            <td class="p-4">Sub-zero Freezing (-260°F)</td>
+                            <td class="p-4 font-medium text-white">Tardigrade & *D. radiodurans*</td>
+                            <td class="p-4">Trehalose protective sugars prevent cell membranes from tearing in ice.</td>
+                            <td class="p-4"><span class="px-2 py-1 rounded bg-emerald-950 text-emerald-400 border border-emerald-800 font-semibold">High (Dormant/Active)</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-8 bg-space-900 border-t border-space-700 text-slate-500 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
+            <div>
+                <p class="font-semibold text-slate-400">10th Grade Biology Astrobiology Research Project</p>
+                <p class="mt-0.5">Topic: Planetary Environments & Extremophile Survival Adaptations</p>
+            </div>
+            <div class="flex space-x-6">
+                <span>NASA Planetary Science Data</span>
+                <span>Biology Research Reference</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JavaScript -->
+    <script>
+        // Smooth scrolling helper
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Tab Switching Logic for Molecular Adaptations
+        function switchTab(tabName) {
+            const tardigradeContent = document.getElementById('tab-tardigrade');
+            const deinococcusContent = document.getElementById('tab-deinococcus');
+            const tardigradeBtn = document.getElementById('tab-tardigrade-btn');
+            const deinococcusBtn = document.getElementById('tab-deinococcus-btn');
+
+            if (tabName === 'tardigrade') {
+                tardigradeContent.classList.remove('hidden');
+                deinococcusContent.classList.add('hidden');
+                
+                tardigradeBtn.classList.add('tab-active');
+                tardigradeBtn.classList.remove('text-slate-400');
+                
+                deinococcusBtn.classList.remove('tab-active');
+                deinococcusBtn.classList.add('text-slate-400');
+            } else {
+                deinococcusContent.classList.remove('hidden');
+                tardigradeContent.classList.add('hidden');
+                
+                deinococcusBtn.classList.add('tab-active');
+                deinococcusBtn.classList.remove('text-slate-400');
+                
+                tardigradeBtn.classList.remove('tab-active');
+                tardigradeBtn.classList.remove('text-slate-400');
+            }
+        }
+    </script>
+</body>
+</html>
